@@ -106,7 +106,7 @@ validate-utf8() {
 
 		# check for utf-16 surrogate pair domain
 		# U+D800 and U+DFFF
-		((cp >= 0xd800 && cp <= 0xdff)) && return 1
+		((cp >= 0xd800 && cp <= 0xdfff)) && return 1
 	done
 
 	return 0
@@ -135,9 +135,12 @@ strings=(
 
 	# utf-16 surrogate pairs
 	# U+D800 and U+DFFF
-	$'\xd8\x00'
-	$'\xdf\xff'
-	$'\xda\xff'
+	$'\ud800'
+	$'\ud801'
+	$'\ud802'
+	$'\ud803'
+	# ...
+	$'\udfff'
 )
 
 for s in "${strings[@]}"; do
